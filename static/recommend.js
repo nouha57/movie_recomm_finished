@@ -12,7 +12,7 @@ $(function() {
   source.addEventListener('input', inputHandler);
 
   $('.movie-button').on('click',function(){
-    var my_api_key = 'YOUR_API_KEY';
+    var my_api_key = 'a6afb8fec867ac35fc822609b084a43a';
     var title = $('.movie').val();
     if (title=="") {
       $('.results').css('display','none');
@@ -26,7 +26,7 @@ $(function() {
 
 // will be invoked when clicking on the recommended movies
 function recommendcard(e){
-  var my_api_key = 'YOUR_API_KEY';
+  var my_api_key = 'a6afb8fec867ac35fc822609b084a43a';
   var title = e.getAttribute('title'); 
   load_details(my_api_key,title);
 }
@@ -41,12 +41,12 @@ function load_details(my_api_key,title){
       if(movie.results.length<1){
         $('.fail').css('display','block');
         $('.results').css('display','none');
-        $("#loader").delay(500).fadeOut();
+        $("#loader").delay(200).fadeOut();
       }
       else{
         $("#loader").fadeIn();
         $('.fail').css('display','none');
-        $('.results').delay(1000).css('display','block');
+        $('.results').delay(200).css('display','block');
         var movie_id = movie.results[0].id;
         var movie_title = movie.results[0].original_title;
         movie_recs(movie_title,movie_id,my_api_key);
@@ -54,7 +54,7 @@ function load_details(my_api_key,title){
     },
     error: function(){
       alert('Invalid Request');
-      $("#loader").delay(500).fadeOut();
+      $("#loader").delay(200).fadeOut();
     },
   });
 }
@@ -66,10 +66,10 @@ function movie_recs(movie_title,movie_id,my_api_key){
     url:"/similarity",
     data:{'name':movie_title},
     success: function(recs){
-      if(recs=="Sorry! The movie you requested is not in our database. Please check the spelling or try with some other movies"){
+      if(recs=="The movie you requested is not available. Please check the spelling or try with some other movies"){
         $('.fail').css('display','block');
         $('.results').css('display','none');
-        $("#loader").delay(500).fadeOut();
+        $("#loader").delay(200).fadeOut();
       }
       else {
         $('.fail').css('display','none');
@@ -84,7 +84,7 @@ function movie_recs(movie_title,movie_id,my_api_key){
     },
     error: function(){
       alert("error recs");
-      $("#loader").delay(500).fadeOut();
+      $("#loader").delay(200).fadeOut();
     },
   }); 
 }
